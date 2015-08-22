@@ -18,21 +18,22 @@ class Notification(object):
         if notification_type != 'transaction':
             logger.warning(u'O campo notificationType recebido é diferente do valor esperado: Deveria ser "transaction" mas foi recebido "%s"' % notification_type)
  
-        self.notification_code = notification_code
-        self.response = self._get_notification(email, token)
-        self.notification_code = notification_code
         if sandbox:
             self.notification_url = settings_sandbox.PAGSEGURO_NOTIFICATION_URL
         else:
             self.notification_url = settings.PAGSEGURO_NOTIFICATION_URL
 
+        self.notification_code = notification_code
+        self.response = self._get_notification(email, token)
+        self.notification_code = notification_code
+
     def _get_notification(self, email, token):
         ''' Consulta o status do pagamento '''        
         url = u'{notification_url}{notification_code}?email={email}&token={token}'.format(
-                                                                                  notification_url=self.notification_url,
-                                                                                  notification_code=self.notification_code,
-                                                                                  email=email,
-                                                                                  token=token)
+            notification_url=self.notification_url,
+            notification_code=self.notification_code,
+            email=email,
+            token=token)
         req = requests.get(url)
         if req.status_code == 200:
             self.xml = req.text
