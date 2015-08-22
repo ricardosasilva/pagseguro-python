@@ -1,0 +1,3 @@
+# Vendedor de Teste
+PAGSEGURO_ACCOUNT_EMAIL = 'vendedor@domain.tld'
+PAGSEGURO_TOKEN = 'seutokendeacessodetestecom32caracteres'
