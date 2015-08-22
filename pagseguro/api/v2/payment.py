@@ -71,11 +71,11 @@ class Payment(BasePaymentRequest):
         if sandbox:
             self.PAGSEGURO_API_URL = settings_sandbox.PAGSEGURO_API_URL
             self.PAGSEGURO_PAYMENT_URL = settings_sandbox.PAGSEGURO_PAYMENT_URL
-            self.PAGSEGURO_NOTIFICATION_URL = settings_sandbox.PAGSEGURO_NOTIFICATION_URL
+            # self.PAGSEGURO_NOTIFICATION_URL = settings_sandbox.PAGSEGURO_NOTIFICATION_URL
         else:
             self.PAGSEGURO_API_URL = settings.PAGSEGURO_API_URL
             self.PAGSEGURO_PAYMENT_URL = settings.PAGSEGURO_PAYMENT_URL
-            self.PAGSEGURO_NOTIFICATION_URL = settings.PAGSEGURO_NOTIFICATION_URL
+            # self.PAGSEGURO_NOTIFICATION_URL = settings.PAGSEGURO_NOTIFICATION_URL
 
 
         self.items = []
@@ -320,5 +320,8 @@ payment_v2_schema = Schema(Object({
     'items': [ item_schema, ],
     'shipping' : shipping_schema,
     'response': str,
-} ,cls=Payment)
+    'sandbox': bool,
+    'PAGSEGURO_API_URL': str,
+    'PAGSEGURO_PAYMENT_URL': str
+},cls=Payment)
 )
